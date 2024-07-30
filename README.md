@@ -7,3 +7,15 @@ Na sua primeira versão, o fórum disponibilizará funcionalidades essenciais pa
 
 ## Tecnologias
 Esse projeto é desenvolvido utilizando o framework JavaScript NextJs, com a biblioteca React para o frontend. No backend é o utilizado o framework Python FastAPI, e para o banco de dados é utlizado o MongoDB.  
+
+
+
+# Funcionamento
+
+## Como iniciar o banco de dados MongoDB
+
+1. Certifique-se de que o Docker está instalado na sua máquina. Você pode baixar e instalar o Docker [aqui](https://docs.docker.com/get-docker/).
+2. No terminal, navegue até o diretório raiz do projeto.
+3. Execute o comando `docker-compose up -d` para iniciar o banco de dados MongoDB.
+
+O banco de dados estará acessível em `mongodb://localhost:27017`.
