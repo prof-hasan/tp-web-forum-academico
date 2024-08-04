@@ -7,16 +7,12 @@ sys.path.append(backend_path)
 
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from .src.database import databseConnection
-from .src.database import DatabaseConstants
-
-
+from .src.database import DatabaseConstants, Seed, databseConnection
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await databseConnection.seedDatabse()
+    await Seed().seedDatabse()
     yield
-    # Depois do yield, e o codigo para fechar a aplicacao
     print("\nFechando a aplicacao...\n")
 
 app = FastAPI(lifespan=lifespan)
@@ -28,11 +24,5 @@ async def root():
         del user["_id"]
 
     return {"message": "Hello World", "users":users}
-
-@app.get("/delete_all")
-async def root():
-    await databseConnection.db[DatabaseConstants.USER_COLLECTION].delete_many({})
-
-    return {"message": "Hello World"}
 
 print("Projeto iniciado em http://localhost:8000")

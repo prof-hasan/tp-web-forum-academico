@@ -13,9 +13,9 @@ class MongoDBConnection:
         print("\nConectado ao MongoDB!\n")
         return cls._instance
 
-    @property
-    def client(self):
-        return self._client
+    # @property
+    # def client(self):
+    #     return self._client
 
     @property
     def db(self):
