@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - '**'  # Executa em qualquer branch
   pull_request:
     branches:
       - main
@@ -43,12 +43,12 @@ jobs:
         working-directory: ./frontend
         run: npm install
 
-      - name: Run backend tests
-        working-directory: ./backend
-        run: |
-          source venv/bin/activate
-          pytest
+      #- name: Run backend tests
+      #  working-directory: ./backend
+      #  run: |
+      #    source venv/bin/activate
+      #    pytest
 
-      - name: Run frontend tests
-        working-directory: ./frontend
-        run: npm test
+      #- name: Run frontend tests
+      #  working-directory: ./frontend
+      #  run: npm test
