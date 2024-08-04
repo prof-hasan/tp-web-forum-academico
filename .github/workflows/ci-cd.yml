@@ -29,8 +29,8 @@ jobs:
     #    run: docker logs $(docker ps -q --filter ancestor=mongo:latest)
 
 
-    #  - name: Check out repository
-    #    uses: actions/checkout@v2
+    - name: Check out repository
+        uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
