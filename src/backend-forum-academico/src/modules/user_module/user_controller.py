@@ -11,5 +11,4 @@ user_router = APIRouter()
 @user_router.get("/users")
 async def get_users():
     users = await userDomain.get_all_users()
-    print("chegou no controller")
     return [user.to_response_dict() for user in users]
