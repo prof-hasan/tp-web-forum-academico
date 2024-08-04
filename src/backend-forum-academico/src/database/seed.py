@@ -1,9 +1,9 @@
-from .mongo_db_connection import MongoDBConnection
+from .mongo_db_connection import databseConnection
 from .database_constants import DatabaseConstants
 
 class Seed:
     def __init__(self):
-        self.db = MongoDBConnection().db
+        self.db = databseConnection.db
 
     async def seedDatabse(self):
         count_users = await self.db[DatabaseConstants.USER_COLLECTION].count_documents({})
