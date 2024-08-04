@@ -7,7 +7,9 @@ sys.path.append(backend_path)
 
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from .src.database import DatabaseConstants, Seed, databseConnection
+from .src.database import Seed
+from .src.models import UserModel
+from .src import user_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -19,10 +21,8 @@ app = FastAPI(lifespan=lifespan)
 
 @app.get("/")
 async def root():
-    users = await databseConnection.db[DatabaseConstants.USER_COLLECTION].find().to_list(length=None)
-    for user in users:
-        del user["_id"]
+    return {"message": "Hello World"}
 
-    return {"message": "Hello World", "users":users}
+app.include_router(user_router)
 
 print("Projeto iniciado em http://localhost:8000")
