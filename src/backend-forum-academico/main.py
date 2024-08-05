@@ -8,7 +8,6 @@ sys.path.append(backend_path)
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from .src.database import Seed
-from .src.models import UserModel
 from .src import user_router
 
 @asynccontextmanager
