@@ -1,2 +1,2 @@
 from .database import *
-from .modules import user_router
+from .modules import user_router, auth_router

@@ -51,10 +51,10 @@ class AuthDomain:
         return pwd_context.hash(password)
 
 
-    #TODO: verificar a assinatura
-    def authenticate_user(self, user:UserModel| None, username: str, password: str):
+    def authenticate_user(self, email: str, password: str):
+        user = self.__userDomain.get_user_by_email(email)
         if not user:
-            return False
+            return None
         if not self.verify_password(password, user.hashed_password):
             return False
         return user
@@ -69,5 +69,12 @@ class AuthDomain:
         to_encode.update({"exp": expire})
         encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
         return encoded_jwt
+    
+    def create_access_token(self, user: UserModel):
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        access_token = self.create_access_token(
+            data={"sub": user.email}, expires_delta=access_token_expires
+        )
+        return Token(access_token=access_token, token_type="bearer")
 
 

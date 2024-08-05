@@ -12,3 +12,7 @@ class UserDomain:
     async def get_user_by_id(self, user_id: str):
         user = await self.__user_repository.find_one({"_id": user_id})
         return UserModel.from_mongo(user)
+    
+    async def get_user_by_email(self, email: str):
+        user = await self.__user_repository.find_one({"email": email})
+        return UserModel.from_mongo(user)
