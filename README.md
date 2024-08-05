@@ -19,3 +19,10 @@ Esse projeto é desenvolvido utilizando o framework JavaScript NextJs, com a bib
 3. Execute o comando `docker-compose up -d` para iniciar o banco de dados MongoDB.
 
 O banco de dados estará acessível em `mongodb://localhost:27017`.
+
+
+## Rodar o backend 
+Siga o readme para instalar as dependencias. Depois para executar do diretorio desse readme, basta executar:
+```
+pipenv run uvicorn src.backend-forum-academico.main:app --reload
+```

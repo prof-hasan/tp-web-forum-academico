@@ -16,6 +16,6 @@
     ```
 - Rodar o projeto com: 
     ```bash
-    uvicorn src.main:app --reload
+    pipenv run uvicorn main:app --reload 
     ```
     A flag reload é para a aplicação reiniciar quando um arquivo for modificado, sem a necessiade de parar a execução e rodar o comando novamente
