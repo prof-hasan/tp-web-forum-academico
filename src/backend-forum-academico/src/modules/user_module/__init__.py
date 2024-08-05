@@ -1,1 +1,1 @@
-from .user_controller import user_router, UserDomain
+from .user_controller import user_router, user_domain

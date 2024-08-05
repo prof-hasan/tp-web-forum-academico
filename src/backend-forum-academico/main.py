@@ -9,10 +9,11 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from .src.database import Seed
 from .src import user_router, auth_router
+from .src.modules.auth_module import TokenDomain
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await Seed().seedDatabse()
+    await Seed(TokenDomain()).seedDatabse()
     yield
     print("\nFechando a aplicacao...\n")
 

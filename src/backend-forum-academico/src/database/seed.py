@@ -1,9 +1,11 @@
 from .mongo_db_connection import databseConnection
 from .database_constants import DatabaseConstants
+from ..modules.auth_module import TokenDomain
 
 class Seed:
-    def __init__(self):
+    def __init__(self, authDomain:TokenDomain):
         self.db = databseConnection.db
+        self.__authDomain = authDomain
 
     async def seedDatabse(self):
         count_users = await self.db[DatabaseConstants.USER_COLLECTION].count_documents({})
@@ -12,24 +14,26 @@ class Seed:
     
 
     async def insertUsers(self):
+        hashed_password = self.__authDomain.get_password_hash("12345")
         users = [
             {
                 "name": "Leonardo Leite",
                 "role": "admin",
                 "email": "leonardo@email.com",
-                "password": "12345"
+                "password": hashed_password
             },
             {
                 "name": "Luiz Vitor",
                 "role": "admin",
                 "email": "luiz_vitor@email.com",
-                "password": "12345"
+                "password": hashed_password
             },
             {
                 "name": "Glaston",
                 "role": "admin",
                 "email": "glaston@email.com",
-                "password": "12345"
+                "password": hashed_password
             }
         ]
+
         await self.db[DatabaseConstants.USER_COLLECTION].insert_many(users)

@@ -11,3 +11,10 @@ class UserModel(CustomBaseModel):
         self.email = email
         self.password = password
         self.role = role
+
+    def to_toke_data(self):
+        return {
+            "name": self.name,
+            "email": self.email,
+            "role": self.role
+        }

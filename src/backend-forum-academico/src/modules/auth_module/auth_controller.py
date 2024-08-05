@@ -1,20 +1,16 @@
-from datetime import timedelta
 from fastapi import APIRouter
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import Depends, HTTPException
-from typing import Annotated, Union
-from ..user_module import UserDomain
-from ...models import UserModel, Token, TokenData
-from .auth_domain import ACCESS_TOKEN_EXPIRE_MINUTES, AuthDomain
-import jwt
-from passlib.context import CryptContext
-from jwt.exceptions import InvalidTokenError
-from typing import Annotated, Union
-
+from typing import Annotated
+from ..user_module import user_domain
+from ...models import Token
+from .auth_domain import  AuthDomain
+from .token_domain import TokenDomain
 
 auth_router = APIRouter()
 
-authDomain = AuthDomain(UserDomain)
+tokenDomain = TokenDomain()
+authDomain = AuthDomain(user_domain, tokenDomain)
 
 
 @auth_router.post("/login")
@@ -28,5 +24,5 @@ async def login_for_access_token(
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    token = await authDomain.create_access_token(user)
+    token = tokenDomain.create_access_token(user.to_toke_data())
     return {"access_token": token, "token_type": "bearer"}

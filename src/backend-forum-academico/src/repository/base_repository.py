@@ -14,7 +14,7 @@ class BaseRepository:
         return await self.__get_collection().find(filter).to_list(None)
     
     async def find_one(self, filter: dict = {}):
-        return await self.__get_collection().find_one(filter).to_list(None)
+        return await self.__get_collection().find_one(filter)
     
     async def save(self, document: CustomBaseModel):
         collection = self.__get_collection()
