@@ -12,7 +12,10 @@ class BaseRepository:
 
     async def find(self, filter: dict = {}):
         return await self.__get_collection().find(filter).to_list(None)
-
+    
+    async def find_one(self, filter: dict = {}):
+        return await self.__get_collection().find_one(filter)
+    
     async def save(self, document: CustomBaseModel):
         collection = self.__get_collection()
         if '_id' in document and document['_id']:
