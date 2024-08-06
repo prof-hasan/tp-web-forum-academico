@@ -13,7 +13,6 @@ export default function Login() {
 
     const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log("Funciona?");
         login(email, password);
     }
 
