@@ -21,7 +21,6 @@ h1 {
   display: inline-block;
   width: 30%;
   height: 100vh;
-
   background-color: #FFFAFA;
 }
 
@@ -80,7 +79,6 @@ label {
     border-color: #C4C4C4;
     border-radius: 15px;
     font-size: 20px;
-
 }
 
 .botao {
