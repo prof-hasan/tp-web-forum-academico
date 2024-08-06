@@ -7,6 +7,9 @@ name = "pypi"
 motor = "*"
 pymongo = "*"
 uvicorn = "*"
+pyjwt = "*"
+passlib = {extras = ["bcrypt"], version = "*"}
+python-multipart = "*"
 
 [dev-packages]
 

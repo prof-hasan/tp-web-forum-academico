@@ -8,12 +8,12 @@ sys.path.append(backend_path)
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from .src.database import Seed
-from .src.models import UserModel
-from .src import user_router
+from .src import user_router, auth_router
+from .src.modules.auth_module import TokenDomain
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await Seed().seedDatabse()
+    await Seed(TokenDomain()).seedDatabse()
     yield
     print("\nFechando a aplicacao...\n")
 
@@ -24,5 +24,6 @@ async def root():
     return {"message": "Hello World"}
 
 app.include_router(user_router)
+app.include_router(auth_router)
 
 print("Projeto iniciado em http://localhost:8000")
