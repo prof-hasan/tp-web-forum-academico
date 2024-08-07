@@ -1,0 +1,32 @@
+.sidebar {
+  width: 200px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box; /* Inclui padding e border na largura e altura */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente */
+  align-items: center; /* Centraliza horizontalmente */
+}
+
+.logo {
+  margin-bottom: 40px; /* Espaçamento abaixo da logo */
+  font-size: 32px; /* Tamanho da logo */
+}
+
+.icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centraliza verticalmente */
+  flex-grow: 1; /* Garante que os ícones ocupem o espaço restante */
+}
+
+.icon {
+  margin-bottom: 48px;
+  font-size: 36px;
+}

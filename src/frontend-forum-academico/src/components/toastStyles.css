@@ -1,0 +1,11 @@
+.Toastify__toast--success {
+  background-color: #28a745; 
+}
+
+.Toastify__toast--error {
+  background-color: #dc3545;
+}
+
+.Toastify__toast--warn {
+  background-color: #ffc107;
+}
