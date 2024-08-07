@@ -1,8 +1,8 @@
 // MyPosts.tsx
 
 import React from 'react';
-import Sidebar from './sidebar';
-import Post from './post';
+import Sidebar from '../../components/Sidebar';
+import Post from '../../components/Post';
 import { PostProps } from '../../commom/interfaces/postProps';
 import './styles.css';
 

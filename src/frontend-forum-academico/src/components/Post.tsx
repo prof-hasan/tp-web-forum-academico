@@ -1,8 +1,6 @@
-// Post.tsx
-
 import React from 'react';
-import './styles.css';
-import { PostProps } from '../../commom/interfaces/postProps';
+import './postStyles.css';
+import { PostProps } from '../commom/interfaces/postProps';
 
 const Post: React.FC<PostProps> = ({ author, date, content, likes, comments }) => (
   <div className="post">

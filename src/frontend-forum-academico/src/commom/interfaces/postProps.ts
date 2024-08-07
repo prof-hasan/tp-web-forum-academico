@@ -4,4 +4,4 @@ export interface PostProps {
     content: string;
     likes: number;
     comments: number;
-    }
+}
