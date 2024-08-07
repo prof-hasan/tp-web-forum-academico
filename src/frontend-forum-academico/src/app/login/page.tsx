@@ -35,12 +35,12 @@ export default function Login() {
                     </div>
 
                     <input className="botao" type="submit" value="Entrar" />
+                    <div id="cad-div">
+                        <button id="cadastrar" className="botao" type="button" onClick={() => console.log("Cadastrar")}>Cadastrar</button>
+                    </div>
                 </form>
             </div>
 
-            <div id="cad-div">
-                <button id="cadastrar" className="botao" type="button" onClick={() => console.log("Cadastrar")}>Cadastrar</button>
-            </div>
         </>
     );
 }
