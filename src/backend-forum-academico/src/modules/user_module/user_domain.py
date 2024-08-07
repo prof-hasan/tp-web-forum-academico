@@ -7,12 +7,18 @@ class UserDomain:
 
     async def get_all_users(self):
         users = await self.__user_repository.find({})
+        if users is None:
+            return None
         return [UserModel.from_mongo(user) for user in users]
     
     async def get_user_by_id(self, user_id: str):
         user = await self.__user_repository.find_one({"_id": user_id})
+        if user is None:
+            return None
         return UserModel.from_mongo(user)
     
     async def get_user_by_email(self, email: str):
         user = await self.__user_repository.find_one({"email": email})
+        if user is None:
+            return None
         return UserModel.from_mongo(user)

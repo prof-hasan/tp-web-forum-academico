@@ -7,6 +7,7 @@ sys.path.append(backend_path)
 
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
+from fastapi.middleware.cors import CORSMiddleware
 from .src.database import Seed
 from .src import user_router, auth_router
 from .src.modules.auth_module import TokenDomain
@@ -18,6 +19,14 @@ async def lifespan(app: FastAPI):
     print("\nFechando a aplicacao...\n")
 
 app = FastAPI(lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Permitir todas as origens
+    allow_credentials=True,
+    allow_methods=["*"],  # Permitir todos os métodos
+    allow_headers=["*"],  # Permitir todos os cabeçalhos
+)
 
 @app.get("/")
 async def root():
