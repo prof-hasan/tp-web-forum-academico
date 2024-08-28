@@ -8,7 +8,7 @@
 - Seguir a organização do backend que será
     - Utilizar as 3 camadas de acesso: 
         1. Controller: Responsável por receber as requisições e validar os dados da request.
-        2. Service: Responsável por gerenciar as regras de negócio e manipulação dos dados.
+        2. Domain: Responsável por gerenciar as regras de negócio e manipulação dos dados.
         3. Repository: Responsável unicamente pelo acesso ao banco de dados. Todo acesso ao banco de dados deve ser feito por essa camada.
     - Com exeção da rota de criação de usuário, todas as rotas devem utilizar o middleware de autenticação que será responsável por validar o token enviado pelo usuário.
     - Os códigos em comum a mais de uma rota devem ficar na pasta shared, como constantes, helpers e models.
