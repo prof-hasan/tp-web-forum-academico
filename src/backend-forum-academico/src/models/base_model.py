@@ -1,15 +1,17 @@
+from typing import Optional
 from bson import ObjectId
+from pydantic import BaseModel
 
-class CustomBaseModel:
-    id: str | None
+class CustomBaseModel(BaseModel):
+    id: str|None = None
 
-    def __init__(self, id):
-        if id is None:
+    def __post_init__(self):
+        if self.id is None:
             self.id = None
-        elif isinstance(id, str):
-            self.id = ObjectId(id)
-        elif isinstance(id, ObjectId):
-            self.id = id
+        elif isinstance(self.id, str):
+            self.id = ObjectId(self.id)
+        elif isinstance(self.id, ObjectId):
+            self.id = self.id
         else:
             raise ValueError("id must be a string or ObjectId")
         
@@ -36,5 +38,6 @@ class CustomBaseModel:
     def from_mongo(cls, data):
         id = str(data['_id'])
         del data['_id']
-        return cls(id, **data)
+        data["id"] = id
+        return cls(**data)
 
