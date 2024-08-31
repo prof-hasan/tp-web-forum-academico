@@ -1,9 +1,13 @@
 from typing import Optional
 from bson import ObjectId
 from pydantic import BaseModel
+from datetime import datetime
 
 class CustomBaseModel(BaseModel):
     id: str|None = None
+    created_at:datetime | None
+    deleted_at:datetime | None
+    deleted_by:str | None
 
     def __post_init__(self):
         if self.id is None:
