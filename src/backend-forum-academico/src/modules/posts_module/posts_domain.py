@@ -22,8 +22,14 @@ class PostsDomain:
     async def update_post(self, post:PostModel):
         return await self.__posts_repository.save(post)
     
+    async def delete_post_by_id(self, post_id:str):
+        post = await self.get_post_by_id(post_id)
+        if post is None:
+            return None
+        await self.__posts_repository.soft_delete(post)
+        return post
+    
 
-# Delete post by id
 # Like post
 # Save Post
 # Get post by userId

@@ -32,10 +32,13 @@ async def get_post_by_id(post:PostModel):
         raise HTTPException(status_code=404, detail="Item not found")
     return post.to_response_dict()
 
+@posts_router.delete("/post/{post_id}", response_model=PostModel)
+async def get_post_by_id(post_id:str):
+    post = await post_domain.delete_post_by_id(post_id)
+    if post is None:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return post.to_response_dict()
 
-
-# Update post by id
-# Delete post by id
 # Like post
 # Save Post
 # Get post by userId
