@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from ...models import PostModel
 from .posts_repository import PostsRepository
 from .posts_domain import PostsDomain
@@ -18,8 +18,15 @@ async def get_posts(page:int):
     posts = await post_domain.get_all_posts(page)
     return [post.to_response_dict() for post in posts]
 
+@posts_router.get("/post/{post_id}", response_model=PostModel)
+async def get_post_by_id(post_id:str):
+    post = await post_domain.get_post_by_id(post_id)
+    if post is None:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return post.to_response_dict()
 
-# Get post by id
+
+
 # Update post by id
 # Delete post by id
 # Like post

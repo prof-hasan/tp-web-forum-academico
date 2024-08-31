@@ -1,3 +1,4 @@
+from bson import ObjectId
 from .posts_repository import PostsRepository
 from ...models import PostModel
 
@@ -12,8 +13,14 @@ class PostsDomain:
         posts_dict = await self.__posts_repository.find_elements_paginated({}, page)
         return [PostModel.from_mongo(post) for post in posts_dict]
     
+    async def get_post_by_id(self, post_id:str):
+        post_dict = await self.__posts_repository.find_one({"_id": ObjectId(post_id)})
+        if post_dict is None:
+            return None
+        return PostModel.from_mongo(post_dict)
+    
 
-# Get post by id
+
 # Update post by id
 # Delete post by id
 # Like post
