@@ -6,5 +6,5 @@ class PostModel(CustomBaseModel):
     user_id:str | None
     text:str | None
     title:str | None
-    likes:list[LikeModel] | None
-    saveds:list[SavedModel] | None
+    likes:list[LikeModel] = []
+    saveds:list[SavedModel] = []
