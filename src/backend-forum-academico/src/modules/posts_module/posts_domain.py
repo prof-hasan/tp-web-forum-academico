@@ -19,9 +19,10 @@ class PostsDomain:
             return None
         return PostModel.from_mongo(post_dict)
     
+    async def update_post(self, post:PostModel):
+        return await self.__posts_repository.save(post)
+    
 
-
-# Update post by id
 # Delete post by id
 # Like post
 # Save Post

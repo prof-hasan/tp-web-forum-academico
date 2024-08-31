@@ -25,6 +25,13 @@ async def get_post_by_id(post_id:str):
         raise HTTPException(status_code=404, detail="Item not found")
     return post.to_response_dict()
 
+@posts_router.put("/post", response_model=PostModel)
+async def get_post_by_id(post:PostModel):
+    post = await post_domain.update_post(post)
+    if post is None:
+        raise HTTPException(status_code=404, detail="Item not found")
+    return post.to_response_dict()
+
 
 
 # Update post by id

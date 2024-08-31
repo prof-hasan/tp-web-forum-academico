@@ -1,3 +1,4 @@
+from bson import ObjectId
 from ..database import databseConnection
 from ..models import CustomBaseModel
 
@@ -23,8 +24,11 @@ class BaseRepository:
     
     async def save(self, document: CustomBaseModel):
         collection = self.__get_collection()
-        if '_id' in document and document['_id']:
-            await collection.replace_one({"_id": document['_id']}, document)
+        if  document.id is not None:
+            id = document.id
+            mongo_dict = document.to_mongo_dict()
+            del mongo_dict["_id"]
+            await collection.replace_one({"_id": ObjectId(id)}, mongo_dict)
         else:
             document.id = (await collection.insert_one(document.to_mongo_dict())).inserted_id
         return document
