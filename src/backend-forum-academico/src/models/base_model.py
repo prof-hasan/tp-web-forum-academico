@@ -5,9 +5,9 @@ from datetime import datetime
 
 class CustomBaseModel(BaseModel):
     id: str|None = None
-    created_at:datetime | None
-    deleted_at:datetime | None
-    deleted_by:str | None
+    created_at: datetime = datetime.now() 
+    deleted_at:datetime | None = None
+    deleted_by:str | None = None
 
     def __post_init__(self):
         if self.id is None:
@@ -23,6 +23,9 @@ class CustomBaseModel(BaseModel):
         data = vars(self)
         if 'id' in data and isinstance(data['id'], ObjectId):
             data['id'] = str(data['id'])
+        
+        if "_id" in data:
+            del data['_id']
         return data
     
     def to_mongo_dict(self):

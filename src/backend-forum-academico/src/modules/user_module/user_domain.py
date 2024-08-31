@@ -22,3 +22,6 @@ class UserDomain:
         if user is None:
             return None
         return UserModel.from_mongo(user)
+    
+    async def delet_all(self):
+        await self.__user_repository.delete_all()

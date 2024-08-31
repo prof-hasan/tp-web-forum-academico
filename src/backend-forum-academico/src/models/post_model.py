@@ -1,4 +1,3 @@
-from pydantic import BaseModel
 from .base_model import CustomBaseModel
 from .like_model import LikeModel
 from .saved_model import SavedModel
