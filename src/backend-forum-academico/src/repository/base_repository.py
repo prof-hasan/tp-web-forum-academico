@@ -13,6 +13,11 @@ class BaseRepository:
     async def find(self, filter: dict = {}):
         return await self.__get_collection().find(filter).to_list(None)
     
+    async def find_elements_paginated(self, filter: dict = {}, page:int = 1):
+        page_size = 10
+        skip = (page - 1) * page_size
+        return await self.__get_collection().find(filter).sort("created_at", 1).skip(skip).limit(page_size).to_list(None)
+    
     async def find_one(self, filter: dict = {}):
         return await self.__get_collection().find_one(filter)
     
