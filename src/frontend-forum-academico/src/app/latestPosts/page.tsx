@@ -1,10 +1,15 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import Post from '../../components/Post';
 import { PostProps } from '../../commom/interfaces/postProps';
 import './styles.css';
 
-const LatestPosts: React.FC = () => {
+const MyPosts: React.FC = () => {
+  
+  const [filter, setFilter] = useState('');
+  
   const posts: PostProps[] = [
     {
       author: 'Zalter',
@@ -36,12 +41,23 @@ const LatestPosts: React.FC = () => {
     },
   ];
 
+  const filteredPosts = posts.filter(post =>
+    post.content.toLowerCase().includes(filter.toLowerCase())
+  );
+
   return (
     <div className="container">
       <Sidebar />
       <main className="main">
-        <h1>Meus posts</h1>
-        {posts.map((post, index) => (
+        <h1>Últimos posts</h1>
+        <input
+          type="text"
+          placeholder="Palavra chave aqui"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="filter-input"
+        />
+        {filteredPosts.map((post, index) => (
           <Post
             key={index}
             author={post.author}
@@ -51,10 +67,9 @@ const LatestPosts: React.FC = () => {
             comments={post.comments}
           />
         ))}
-        <div className="floating-action-button">+</div>
       </main>
     </div>
   );
 }
 
-export default LatestPosts;
+export default MyPosts;
