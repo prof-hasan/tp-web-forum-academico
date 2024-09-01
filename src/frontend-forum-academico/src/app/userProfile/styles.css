@@ -1,0 +1,58 @@
+.main {
+  margin-left: 240px; /* Ajuste para compensar a largura da sidebar fixa */
+  padding: 20px;
+  background-color: #f5f5f5;
+  flex: 1;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.personal-info, .usage-data {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 48%; /* Tamanho para alinhar os dois lados */
+}
+
+.personal-info h2, .usage-data h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: calc(100% - 100px); /* Largura do botão ATUALIZAR */
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-group button {
+  width: 90px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.usage-data p {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
