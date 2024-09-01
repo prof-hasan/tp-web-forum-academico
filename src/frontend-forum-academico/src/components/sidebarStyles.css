@@ -1,5 +1,5 @@
 .sidebar {
-  width: 200px;
+  width: 240px;
   background-color: #ffffff;
   padding: 20px;
   border-right: 1px solid #ddd;
@@ -7,26 +7,41 @@
   position: fixed;
   top: 0;
   left: 0;
-  box-sizing: border-box; /* Inclui padding e border na largura e altura */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centraliza verticalmente */
-  align-items: center; /* Centraliza horizontalmente */
+  align-items: center;
 }
 
 .logo {
-  margin-bottom: 40px; /* Espaçamento abaixo da logo */
-  font-size: 32px; /* Tamanho da logo */
+  margin-bottom: 40px;
+  width: 100px; /* Ajuste conforme necessário */
 }
 
 .icons {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Centraliza verticalmente */
-  flex-grow: 1; /* Garante que os ícones ocupem o espaço restante */
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .icon {
-  margin-bottom: 48px;
+  background: none;
+  border: none;
   font-size: 36px;
+  margin-bottom: 48px;
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.icon:hover {
+  background-color: #f0f0f0;
+  border-radius: 50%;
+}
+
+.icon.active {
+  background-color: #007bff; /* Cor de fundo para o ícone ativo */
+  color: white; /* Cor do ícone ativo */
+  border-radius: 50%;
 }
