@@ -1,12 +1,10 @@
-// MyPosts.tsx
-
 import React from 'react';
 import Sidebar from '../../components/Sidebar';
 import Post from '../../components/Post';
 import { PostProps } from '../../commom/interfaces/postProps';
 import './styles.css';
 
-const MyPosts: React.FC = () => {
+const LatestPosts: React.FC = () => {
   const posts: PostProps[] = [
     {
       author: 'Zalter',
@@ -53,9 +51,10 @@ const MyPosts: React.FC = () => {
             comments={post.comments}
           />
         ))}
+        <div className="floating-action-button">+</div>
       </main>
     </div>
   );
 }
 
-export default MyPosts;
+export default LatestPosts;
