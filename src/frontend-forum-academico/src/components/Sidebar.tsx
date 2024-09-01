@@ -18,19 +18,19 @@ const Sidebar: React.FC = () => {
       <div className="icons">
         <button 
           className="icon" 
-          onClick={() => handleNavigation('/cloud')}
+          onClick={() => handleNavigation('/latestPosts')}
         >
           ☁️
         </button>
         <button 
           className="icon" 
-          onClick={() => handleNavigation('/files')}
+          onClick={() => handleNavigation('/myPosts')}
         >
           📁
         </button>
         <button 
           className="icon" 
-          onClick={() => handleNavigation('/profile')}
+          onClick={() => handleNavigation('/userProfile')}
         >
           👤
         </button>
