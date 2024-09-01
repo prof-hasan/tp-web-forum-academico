@@ -39,3 +39,9 @@
   background-color: #f0f0f0;
   border-radius: 50%;
 }
+
+.icon.active {
+  background-color: #007bff; /* Cor de fundo para o ícone ativo */
+  color: white; /* Cor do ícone ativo */
+  border-radius: 50%;
+}
