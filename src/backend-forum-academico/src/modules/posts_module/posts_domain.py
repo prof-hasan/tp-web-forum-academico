@@ -62,5 +62,7 @@ class PostsDomain:
         posts =  await self.__posts_repository.find({"saveds.user_id": user_id})
         return posts
     
-
-# Get liked posts by userId
+    async def get_liked_posts_by_user_id(self, user_id:str):
+        posts =  await self.__posts_repository.find({"likes.user_id": user_id})
+        return posts
+    

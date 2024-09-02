@@ -61,6 +61,8 @@ async def save_post(user_id:str):
     result = await post_domain.get_saved_posts_by_user_id(user_id)
     return [post.to_response_dict() for post in result]
 
-
-# Get liked posts by userId
+@posts_router.get("/posts/user/liked/{user_id}", status_code=200)
+async def save_post(user_id:str):
+    result = await post_domain.get_liked_posts_by_user_id(user_id)
+    return [post.to_response_dict() for post in result]
 
