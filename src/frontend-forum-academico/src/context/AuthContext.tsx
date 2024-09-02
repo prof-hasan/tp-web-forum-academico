@@ -28,7 +28,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             if (response.status === 200) {
                 setIsAuthenticated(true);
                 localStorage.setItem('acessToken', response.data.access_token);
-                // toast.success("Login realizado com sucesso!");
                 router.push('/myPosts'); 
             }
         } catch (error: any) {

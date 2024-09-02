@@ -53,7 +53,6 @@ const MyPosts: React.FC = () => {
             comments={post.comments}
           />
         ))}
-        <div className="floating-action-button">+</div>
       </main>
     </div>
   );
