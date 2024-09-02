@@ -9,7 +9,7 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
 from .src.database import Seed
-from .src import user_router, auth_router
+from .src import user_router, auth_router, posts_router
 from .src.modules.auth_module import TokenDomain
 
 @asynccontextmanager
@@ -34,5 +34,6 @@ async def root():
 
 app.include_router(user_router)
 app.include_router(auth_router)
+app.include_router(posts_router)
 
 print("Projeto iniciado em http://localhost:8000")
