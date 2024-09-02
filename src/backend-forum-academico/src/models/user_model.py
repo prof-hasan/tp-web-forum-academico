@@ -5,13 +5,6 @@ class UserModel(CustomBaseModel):
     password:str | None
     role:str | None
 
-    def __init__(self, id=None, name=None, email=None, role=None, password=None):
-        super().__init__(id)
-        self.name = name
-        self.email = email
-        self.password = password
-        self.role = role
-
     def to_toke_data(self):
         return {
             "name": self.name,
