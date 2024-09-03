@@ -2,9 +2,11 @@ from fastapi import APIRouter
 from .user_repository import UserRepository
 from .user_domain import UserDomain
 from ...models import UserModel
+from ..auth_module import TokenDomain
 
-userRepository = UserRepository()
-user_domain = UserDomain(userRepository)
+user_repository = UserRepository()
+token_domain = TokenDomain()
+user_domain = UserDomain(user_repository)
 
 user_router = APIRouter()
 
@@ -22,5 +24,6 @@ async def delete_all_users():
 
 @user_router.post("/user", status_code=201)
 async def create_user(user: UserModel):
+    user.password = token_domain.get_password_hash(user.password)
     user = await user_domain.create_user(user)
     return
