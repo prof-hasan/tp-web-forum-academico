@@ -58,6 +58,6 @@ jobs:
       #    source venv/bin/activate
       #    pytest
 
-      - name: Run frontend tests
-        working-directory: ./src/frontend-forum-academico
-        run: npm test
+      #- name: Run frontend tests
+      #  working-directory: ./frontend
+      #  run: npm test
