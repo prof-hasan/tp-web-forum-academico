@@ -19,3 +19,8 @@ async def get_users():
 async def delete_all_users():
     await user_domain.delet_all()
     return {"message": "All users deleted successfully!"}
+
+@user_router.post("/user", status_code=201)
+async def create_user(user: UserModel):
+    user = await user_domain.create_user(user)
+    return

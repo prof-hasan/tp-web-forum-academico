@@ -25,3 +25,6 @@ class UserDomain:
     
     async def delet_all(self):
         await self.__user_repository.delete_all()
+
+    async def create_user(self, user: UserModel):
+        await self.__user_repository.save(user)

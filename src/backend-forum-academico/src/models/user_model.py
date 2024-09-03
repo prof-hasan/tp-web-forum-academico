@@ -3,7 +3,7 @@ class UserModel(CustomBaseModel):
     name:str | None
     email:str | None
     password:str | None
-    role:str | None
+    role:str | None =  "user"
 
     def to_toke_data(self):
         return {
