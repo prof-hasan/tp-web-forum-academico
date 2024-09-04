@@ -3,16 +3,11 @@
 import React, { useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import './styles.css';
+import { useAuth } from '@/context/AuthContext';
 
 const UserProfile: React.FC = () => {
-  const [userData, setUserData] = useState({
-    firstName: 'Bob',
-    lastName: 'Brown',
-    email: 'bod@email',
-    registrationNumber: '15879336',
-    course: 'Engenharia de Computação',
-    password: '123456',
-  });
+  const {myUser} = useAuth();
+
 
   const [usageData] = useState({
     postsMade: 34,
@@ -24,16 +19,18 @@ const UserProfile: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUserData({
-      ...userData,
-      [name]: value,
-    });
+    // setUserData({
+    //   ...userData,
+    //   [name]: value,
+    // });
   };
 
   const handleUpdate = (field: string) => {
     // Aqui você pode fazer a requisição para a API para atualizar o campo correspondente
-    console.log(`Atualizando ${field}:`, userData[field as keyof typeof userData]);
+    // console.log(`Atualizando ${field}:`, userData[field as keyof typeof userData]);
   };
+
+  console.log(myUser);
 
   return (
     <div className="container">
@@ -49,9 +46,9 @@ const UserProfile: React.FC = () => {
                 <input
                   type="text"
                   name="firstName"
-                  value={userData.firstName}
+                  value={myUser?.name.split(' ')[0]}
                   onChange={handleChange}
-                  placeholder={userData.firstName}
+                  placeholder={myUser?.name.split(' ')[0]}
                 />
                 <button type="button" onClick={() => handleUpdate('firstName')}>
                   ATUALIZAR
@@ -62,9 +59,9 @@ const UserProfile: React.FC = () => {
                 <input
                   type="text"
                   name="lastName"
-                  value={userData.lastName}
+                  value={myUser?.name.split(' ').slice(1).join(' ')}
                   onChange={handleChange}
-                  placeholder={userData.lastName}
+                  placeholder={myUser?.name.split(' ').slice(1).join(' ')}
                 />
                 <button type="button" onClick={() => handleUpdate('lastName')}>
                   ATUALIZAR
@@ -75,37 +72,11 @@ const UserProfile: React.FC = () => {
                 <input
                   type="email"
                   name="email"
-                  value={userData.email}
+                  value={myUser?.email}
                   onChange={handleChange}
-                  placeholder={userData.email}
+                  placeholder={myUser?.email}
                 />
                 <button type="button" onClick={() => handleUpdate('email')}>
-                  ATUALIZAR
-                </button>
-              </div>
-              <div className="form-group">
-                <label>Matrícula</label>
-                <input
-                  type="text"
-                  name="registrationNumber"
-                  value={userData.registrationNumber}
-                  onChange={handleChange}
-                  placeholder={userData.registrationNumber}
-                />
-                <button type="button" onClick={() => handleUpdate('registrationNumber')}>
-                  ATUALIZAR
-                </button>
-              </div>
-              <div className="form-group">
-                <label>Curso</label>
-                <input
-                  type="text"
-                  name="course"
-                  value={userData.course}
-                  onChange={handleChange}
-                  placeholder={userData.course}
-                />
-                <button type="button" onClick={() => handleUpdate('course')}>
                   ATUALIZAR
                 </button>
               </div>
@@ -114,9 +85,9 @@ const UserProfile: React.FC = () => {
                 <input
                   type="password"
                   name="password"
-                  value={userData.password}
+                  value={myUser?.password}
                   onChange={handleChange}
-                  placeholder={userData.password}
+                  placeholder={myUser?.password}
                 />
                 <button type="button" onClick={() => handleUpdate('password')}>
                   ATUALIZAR
