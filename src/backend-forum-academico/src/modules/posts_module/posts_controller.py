@@ -2,9 +2,9 @@ from fastapi import APIRouter, HTTPException
 from ...models import PostModel
 from .posts_repository import PostsRepository
 from .posts_domain import PostsDomain
+from ..user_module import user_domain
 
 posts_router = APIRouter()
-
 post_respository = PostsRepository()
 post_domain = PostsDomain(post_respository)
 
@@ -13,10 +13,9 @@ async def create_post(post:PostModel):
     return (await post_domain.create_post(post)).to_response_dict()
      
 
-@posts_router.get("/posts/{page}", response_model=list[PostModel])
+@posts_router.get("/posts/{page}", response_model=list)
 async def get_posts(page:int):
-    posts = await post_domain.get_all_posts(page)
-    return [post.to_response_dict() for post in posts]
+    return await post_domain.get_all_posts(page)
 
 @posts_router.get("/post/{post_id}", response_model=PostModel)
 async def get_post_by_id(post_id:str):
