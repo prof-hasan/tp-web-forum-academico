@@ -1,14 +1,15 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from .user_repository import UserRepository
 from .user_domain import UserDomain
 from ...models import UserModel
 from ..auth_module import TokenDomain
+from ..auth_module import auth_middleware
 
 user_repository = UserRepository()
 token_domain = TokenDomain()
 user_domain = UserDomain(user_repository)
 
-user_router = APIRouter()
+user_router = APIRouter(dependencies=[Depends(auth_middleware)])
 
 @user_router.get("/users", response_model=list[UserModel])
 async def get_users():
@@ -27,3 +28,8 @@ async def create_user(user: UserModel):
     user.password = token_domain.get_password_hash(user.password)
     user = await user_domain.create_user(user)
     return
+
+@user_router.get("/my_user", response_model=UserModel)
+async def get_user_by_id(token = Depends(auth_middleware)):
+    user = await user_domain.get_user_by_id(token["id"])
+    return user
