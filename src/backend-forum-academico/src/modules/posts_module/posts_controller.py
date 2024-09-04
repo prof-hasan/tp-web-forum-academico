@@ -4,6 +4,7 @@ from .posts_repository import PostsRepository
 from .posts_domain import PostsDomain
 from ..user_module import user_domain
 from ..auth_module import auth_middleware
+from datetime import datetime
 
 # posts_router = APIRouter()
 posts_router = APIRouter(dependencies=[Depends(auth_middleware)])
@@ -12,6 +13,7 @@ post_domain = PostsDomain(post_respository)
 
 @posts_router.post("/post", status_code=201)
 async def create_post(post:PostModel):
+    post.created_at = datetime.now()
     return (await post_domain.create_post(post)).to_response_dict()
 
 @posts_router.get("/posts/{page}", response_model=list)
@@ -55,7 +57,7 @@ async def save_post(post_id:str, token = Depends(auth_middleware)):
 @posts_router.get("/user_posts", status_code=200)
 async def get_user_posts(token = Depends(auth_middleware)):
     result = await post_domain.get_posts_by_user_id(token["id"])
-    return [post.to_response_dict() for post in result]
+    return result
 
 @posts_router.get("/posts/user/saved/{user_id}", status_code=200)
 async def get_post_saved_by_user(token = Depends(auth_middleware)):

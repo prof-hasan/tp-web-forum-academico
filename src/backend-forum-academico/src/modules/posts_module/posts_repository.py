@@ -42,6 +42,7 @@ class PostsRepository(BaseRepository[T]):
                     "user_id": {"$toString": "$user_id"},  # Converte o user_id do post para string
                     "created_at": 1,
                     "text": 1,
+                    "title": 1,
                     "user_name": "$user_info.name",
                     "likes": {
                         "$map": {
