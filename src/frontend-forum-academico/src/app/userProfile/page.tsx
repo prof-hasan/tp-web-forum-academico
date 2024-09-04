@@ -1,13 +1,21 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import './styles.css';
 import { useAuth } from '@/context/AuthContext';
+import { usePosts } from '@/context/PostContext';
+import { formatDateTime } from '@/commom/helper/date';
 
 const UserProfile: React.FC = () => {
   const {myUser} = useAuth();
+  const {myPosts,  getMyPosts} = usePosts();
 
+  useEffect(() => {
+    if(myPosts.length === 0){
+      getMyPosts();
+    }
+  },[])
 
   const [usageData] = useState({
     postsMade: 34,
@@ -97,11 +105,10 @@ const UserProfile: React.FC = () => {
           </div>
           <div className="usage-data">
             <h2>Dados de uso</h2>
-            <p>Post feitos: {usageData.postsMade}</p>
-            <p>Likes recebidos: {usageData.likesReceived}</p>
-            <p>Posts salvos: {usageData.postsSaved}</p>
-            <p>Data que entrou na plataforma: {usageData.joinedDate}</p>
-            <p>Último login: {usageData.lastLogin}</p>
+            <p>Post feitos: {myPosts.length}</p>
+            <p>Likes recebidos: {myPosts.reduce((acc,post)=>acc+post.likes.length,0)}</p>
+            <p>Posts salvos: {myPosts.reduce((acc,post)=>acc+post.saveds.length,0)}</p>
+            <p>Data que entrou na plataforma: {formatDateTime(myUser?.created_at)}</p>
           </div>
         </div>
       </main>
