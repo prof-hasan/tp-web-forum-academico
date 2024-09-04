@@ -2,9 +2,12 @@ import React from 'react';
 import './postStyles.css';
 import { PostProps } from '../../commom/interfaces/postProps';
 import { formatDateTime } from '@/commom/helper/date';
+import { usePosts } from '@/context/PostContext';
 
-const Post: React.FC<PostProps> = ({ author, date, content, likes, comments })=>{
+const Post: React.FC<PostProps> = ({ _id ,author, date, content, likes, comments })=>{
 
+  const {likePost} = usePosts();
+  
   return (
     <div className="post">
       <div className="header">
@@ -13,7 +16,7 @@ const Post: React.FC<PostProps> = ({ author, date, content, likes, comments })=>
       </div>
       <div className="content">{content}</div>
       <div className="footer">
-        <span className="likes">👍 {likes}</span>
+        <span className="likes" onClick={()=>likePost(_id)}>👍 {likes}</span>
         <span className="comments">💾 {comments}</span>
       </div>
     </div>

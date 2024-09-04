@@ -41,7 +41,7 @@ async def get_post_by_id(post_id:str):
         raise HTTPException(status_code=404, detail="Post nao encontrado")
     return post.to_response_dict()
 
-@posts_router.post("/post/like/{post_id}", status_code=201)
+@posts_router.post("/like_post/{post_id}", status_code=201)
 async def like_post(post_id:str, token = Depends(auth_middleware)):
     result = await post_domain.like_post(post_id, token["id"])
     if result is None:

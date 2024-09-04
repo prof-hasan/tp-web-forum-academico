@@ -29,6 +29,7 @@
 
 .likes, .comments {
   margin-left: 20px;
+  cursor: pointer 
 }
 
 .author {

@@ -11,6 +11,7 @@ interface PostContextType {
   getPosts: () => void;
   getMyPosts: () => void;
   createPost: (newPost:NewPost) => void;
+  likePost: (postId: string) => Promise<void>
   posts: ApiPost[];
   myPosts: ApiPost[];
 }
@@ -22,6 +23,24 @@ export const PostProvider = ({ children }: { children: ReactNode }) => {
     const [page, setPage] = useState(1);
     const [posts, setPosts] = useState<[]>([]);
     const [myPosts, setMyPosts] = useState<[]>([]);
+
+    const likePost = async (postId: string) => {
+        try {
+            const token = localStorage.getItem('acessToken');
+            const response: any = await axios.post(`http://localhost:8000/like_post/${postId}`,{headers:{
+                "Authorization": `Bearer ${token}`,
+            }});
+            await getPosts();
+
+        } catch (error: any) {
+            if (error.response && error.response.status === 401) {
+                toast.error("Credenciais inválidas!"); 
+                router.push('/login');
+            } else {
+                toast.error("Ocorreu um erro ao tentar curtir o post. Por favor, tente novamente."); 
+            }
+        }
+    }
 
     const getPosts = useCallback(async () => {
         try {
@@ -81,7 +100,7 @@ export const PostProvider = ({ children }: { children: ReactNode }) => {
     }
 
     return (
-        <PostContext.Provider value={{ getPosts, getMyPosts, posts, myPosts, createPost }}>
+        <PostContext.Provider value={{ getPosts, getMyPosts, posts, myPosts, createPost, likePost }}>
             {children}
         </PostContext.Provider>
     );

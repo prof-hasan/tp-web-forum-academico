@@ -57,6 +57,7 @@ const MyPosts: React.FC = () => {
         {filteredPosts.map((post, index) => (
           <Post
             key={index}
+            _id={post._id}
             author={`${post.user_name} ${post.title}`}
             date={post.created_at}
             content={post.text}
