@@ -3,17 +3,23 @@
 import { useAuth } from "@/context/AuthContext";
 import "./login_style.css";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 
 export default function Login() {
+    const router = useRouter();
     const { login, isAuthenticated } = useAuth();
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState(""); 
     const [password, setPassword] = useState("");
 
 
     const submitLogin = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         login(email, password);
+    }
+
+    const signupHandler = () => {
+        router.push("/signup");
     }
 
     return (
@@ -36,7 +42,7 @@ export default function Login() {
 
                     <input className="botao" type="submit" value="Entrar" />
                     <div id="cad-div">
-                        <button id="cadastrar" className="botao" type="button" onClick={() => console.log("Cadastrar")}>Cadastrar</button>
+                        <button id="cadastrar" className="botao" type="button" onClick={signupHandler}>Cadastrar</button>
                     </div>
                 </form>
             </div>

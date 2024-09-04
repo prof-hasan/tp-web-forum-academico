@@ -7,9 +7,9 @@ from jwt.exceptions import InvalidTokenError
 from typing import Annotated
 from ..user_module.user_domain import UserDomain
 from .token_domain import TokenDomain
+from .token_domain import oauth2_scheme
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 class AuthDomain:
     def __init__(self, userDomain:UserDomain, token_domain:TokenDomain):

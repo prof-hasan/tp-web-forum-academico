@@ -9,5 +9,6 @@ class UserModel(CustomBaseModel):
         return {
             "name": self.name,
             "email": self.email,
-            "role": self.role
+            "role": self.role,
+            "id": self.id
         }

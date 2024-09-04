@@ -1,3 +1,4 @@
+from bson import ObjectId
 from .user_repository import UserRepository
 from ...models import UserModel
 
@@ -12,7 +13,7 @@ class UserDomain:
         return users
     
     async def get_user_by_id(self, user_id: str):
-        user = await self.__user_repository.find_one({"_id": user_id})
+        user = await self.__user_repository.find_one({"_id": ObjectId(user_id)})
         if user is None:
             return None
         return user

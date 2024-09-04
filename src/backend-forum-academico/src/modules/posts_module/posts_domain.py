@@ -12,7 +12,7 @@ class PostsDomain:
         return await self.__posts_repository.save(post)
     
     async def get_all_posts(self, page:int):
-        posts = await self.__posts_repository.find_elements_paginated({}, page)
+        posts = await self.__posts_repository.get_posts_with_users({},page)
         return posts
     
     async def get_post_by_id(self, post_id:str):
@@ -55,7 +55,7 @@ class PostsDomain:
         return await self.__posts_repository.save(post)
     
     async def get_posts_by_user_id(self, user_id:str):
-        posts =  await self.__posts_repository.find({"user_id": user_id})
+        posts = await self.__posts_repository.get_posts_with_users({"user_id": user_id},1)
         return posts
     
     async def get_saved_posts_by_user_id(self, user_id:str):
