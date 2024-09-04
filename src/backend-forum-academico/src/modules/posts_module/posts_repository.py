@@ -39,12 +39,32 @@ class PostsRepository(BaseRepository[T]):
             {
                 "$project": {
                     "_id": {"$toString": "$_id"},  # Converte o ObjectId do post para string
+                    "user_id": {"$toString": "$user_id"},  # Converte o user_id do post para string
                     "created_at": 1,
                     "text": 1,
                     "user_name": "$user_info.name",
-                    "title":1,
-                    "likes": 1,
-                    "saveds": 1
+                    "likes": {
+                        "$map": {
+                            "input": "$likes",
+                            "as": "like",
+                            "in": {
+                                "_id": {"$toString": "$$like._id"},  # Converte o ObjectId do like para string
+                                "user_id": "$$like.user_id",  # Mantém os outros campos do like inalterados
+                                "timestamp": "$$like.timestamp"  # Exemplo de outro campo
+                            }
+                        }
+                    },
+                    "saveds": {
+                        "$map": {
+                            "input": "$saveds",
+                            "as": "saved",
+                            "in": {
+                                "_id": {"$toString": "$$saved._id"},  # Converte o ObjectId do saved para string
+                                "user_id": "$$saved.user_id",  # Mantém os outros campos do saved inalterados
+                                "timestamp": "$$saved.timestamp"  # Exemplo de outro campo
+                            }
+                        }
+                    }
                 }
             },
             {
