@@ -35,6 +35,14 @@
   transition: background-color 0.2s ease;
 }
 
+.selected{
+  background-color: #444242;
+  border-radius: 50%;
+  color: white;
+  font-size: 42px;
+
+}
+
 .icon:hover {
   background-color: #f0f0f0;
   border-radius: 50%;

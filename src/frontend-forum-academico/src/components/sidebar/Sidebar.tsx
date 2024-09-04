@@ -3,13 +3,16 @@
 import React from 'react';
 import './sidebarStyles.css';
 import { useRouter } from 'next/navigation';
+import { useSideBar } from '@/context/SidebarContext';
 
 const Sidebar: React.FC = () => {
+  const { tabIndex, changeTab } = useSideBar();
   
   const router = useRouter();
 
-  const handleNavigation = (path: string) => {
+  const handleNavigation = (path: string, index:number) => {
     router.push(path);
+    changeTab(index);
   };
 
   return (
@@ -17,20 +20,20 @@ const Sidebar: React.FC = () => {
       <img src="/logo.svg" alt="logo" className='logo' />
       <div className="icons">
         <button 
-          className="icon" 
-          onClick={() => handleNavigation('/latestPosts')}
+          className={`icon ${tabIndex === 0 ? 'selected' : ''}` }
+          onClick={() => handleNavigation('/latestPosts',0)}
         >
           ☁️
         </button>
         <button 
-          className="icon" 
-          onClick={() => handleNavigation('/myPosts')}
+          className={`icon ${tabIndex === 1 ? 'selected' : ''}` }
+          onClick={() => handleNavigation('/myPosts',1)}
         >
           📁
         </button>
         <button 
-          className="icon" 
-          onClick={() => handleNavigation('/userProfile')}
+          className={`icon ${tabIndex === 2 ? 'selected' : ''}` }
+          onClick={() => handleNavigation('/userProfile',2)}
         >
           👤
         </button>

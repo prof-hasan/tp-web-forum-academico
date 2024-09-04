@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../../components/sidebar/Sidebar';
-import NewPostModal from '../../components/NewPostModal';
 import { PostProps } from '../../commom/interfaces/postProps';
 import './styles.css';
 import { NewPostModalProps } from '@/commom/interfaces/newPostModal';
 import Post from '../../components/post/Post';
 import { usePosts } from '@/context/PostContext';
+import NewPostModal from '@/components/newPostModal/NewPostModal';
 
 const MyPosts: React.FC = () => {
     const {getPosts, posts} = usePosts();

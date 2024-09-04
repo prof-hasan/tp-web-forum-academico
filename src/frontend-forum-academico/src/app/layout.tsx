@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
-import CustomToastContainer from "@/components/ToastContainer";
+import CustomToastContainer from "@/components/toastContainer/ToastContainer";
 import { PostProvider } from "@/context/PostContext";
+import { SidebarProvider } from "@/context/SidebarContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,10 +29,12 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <AuthProvider>
-          <PostProvider>
-            <CustomToastContainer />
-              {children}
-          </PostProvider>
+          <SidebarProvider>
+            <PostProvider>
+              <CustomToastContainer />
+                {children}
+            </PostProvider>
+          </SidebarProvider>
         </AuthProvider>
       </body>
     </html>
