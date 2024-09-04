@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <h1>Pagina inicial Forum academico</h1>
+      <h1>Loading...</h1>
     </main>
   );
 }

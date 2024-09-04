@@ -6,7 +6,6 @@ from ..user_module import user_domain
 from ..auth_module import auth_middleware
 from datetime import datetime
 
-# posts_router = APIRouter()
 posts_router = APIRouter(dependencies=[Depends(auth_middleware)])
 post_respository = PostsRepository()
 post_domain = PostsDomain(post_respository)
