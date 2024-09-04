@@ -13,6 +13,8 @@ const MyPosts: React.FC = () => {
     getMyPosts();
   }, [getMyPosts]);
 
+  console.log(myPosts);
+
   return (
     <div className="container">
       <Sidebar />

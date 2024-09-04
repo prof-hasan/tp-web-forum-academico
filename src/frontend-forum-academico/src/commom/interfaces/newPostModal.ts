@@ -1,4 +1,4 @@
 export interface NewPostModalProps {
     onClose: () => void;
-    onPost: (content: string) => void;
+    onPost: (title:string, body:string) => void;
 }

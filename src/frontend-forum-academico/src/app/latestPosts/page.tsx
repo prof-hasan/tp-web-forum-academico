@@ -2,15 +2,23 @@
 
 import React, { useEffect, useState } from 'react';
 import Sidebar from '../../components/sidebar/Sidebar';
-import { PostProps } from '../../commom/interfaces/postProps';
+import { NewPost } from '../../commom/interfaces/postProps';
 import './styles.css';
 import { NewPostModalProps } from '@/commom/interfaces/newPostModal';
 import Post from '../../components/post/Post';
 import { usePosts } from '@/context/PostContext';
 import NewPostModal from '@/components/newPostModal/NewPostModal';
+import { useAuth } from '@/context/AuthContext';
 
 const MyPosts: React.FC = () => {
-    const {getPosts, posts} = usePosts();
+    const { getPosts, posts, createPost } = usePosts();
+    const { myUser, getMyUser } = useAuth();
+
+    useEffect(() => {
+      if(!myUser){
+          getMyUser();
+      }
+    },[]);
 
     useEffect(() => {
       getPosts();
@@ -23,15 +31,16 @@ const MyPosts: React.FC = () => {
     post.text.toLowerCase().includes(filter.toLowerCase())
   );
 
-  const handleNewPost = (content: string) => {
-    const newPost: PostProps = {
-      author: 'Zalter', 
-      date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
-      content,
-      likes: 0,
-      comments: 0,
+  const handleNewPost = async (title:string, body:string) => {
+    const newPost: NewPost = {
+      user_id: myUser?.id!, 
+      title: title,
+      text: body,
     };
+    await createPost(newPost);
   };
+
+  console.log(posts);
 
   return (
     <div className="container">

@@ -16,4 +16,10 @@ interface ApiPost {
     user_name: string; 
 }
 
-export type { PostProps, ApiPost };
+interface NewPost {
+    user_id: string;       
+    text: string;      
+    title: string;
+}
+
+export type { PostProps, ApiPost, NewPost };

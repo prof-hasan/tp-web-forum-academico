@@ -4,12 +4,13 @@ import { useRouter } from 'next/navigation';
 import { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { ApiPost } from "@/commom/interfaces/postProps";
+import { ApiPost, NewPost } from "@/commom/interfaces/postProps";
 import { headers } from 'next/headers';
 
 interface PostContextType {
   getPosts: () => void;
   getMyPosts: () => void;
+  createPost: (newPost:NewPost) => void;
   posts: ApiPost[];
   myPosts: ApiPost[];
 }
@@ -56,8 +57,31 @@ export const PostProvider = ({ children }: { children: ReactNode }) => {
         }
     }, []);
 
+    const createPost = async (newPost:NewPost)=>{
+        try {
+            const token = localStorage.getItem('acessToken');
+            const response: any = await axios.post(`http://localhost:8000/post`, newPost, {headers:{
+                "Authorization": `Bearer ${token}`,
+            }});
+            if (response.status === 201) {
+                await getPosts();
+                toast.success("Post criado com sucesso!");
+                return;
+            }
+            toast.error("Algo deu errado. Tente novamente.");
+            console.error(response);
+        } catch (error: any) {
+            if (error.response && error.response.status === 401) {
+                toast.error("Credenciais inválidas!"); 
+                router.push('/login');
+            } else {
+                toast.error("Ocorreu um erro ao carregar os seus posts. Tente novamente."); 
+            }
+        }
+    }
+
     return (
-        <PostContext.Provider value={{ getPosts, getMyPosts, posts, myPosts }}>
+        <PostContext.Provider value={{ getPosts, getMyPosts, posts, myPosts, createPost }}>
             {children}
         </PostContext.Provider>
     );

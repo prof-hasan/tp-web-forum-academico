@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                 setIsAuthenticated(true);
                 localStorage.setItem('acessToken', response.data.access_token);
                 await getMyUser();
-                router.push('/myPosts'); 
+                router.push('/latestPosts'); 
             }
         } catch (error: any) {
             if (error.response && error.response.status === 401) {
