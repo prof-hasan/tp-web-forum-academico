@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import Sidebar from '../../components/Sidebar';
-import Post from '../../components/Post';
+import Sidebar from '../../components/sidebar/Sidebar';
+import Post from '../../components/post/Post';
 import './styles.css';
 import { usePosts } from '@/context/PostContext';
 

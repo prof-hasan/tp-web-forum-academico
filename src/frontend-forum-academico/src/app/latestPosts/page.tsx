@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import Sidebar from '../../components/Sidebar';
+import Sidebar from '../../components/sidebar/Sidebar';
 import NewPostModal from '../../components/NewPostModal';
 import { PostProps } from '../../commom/interfaces/postProps';
 import './styles.css';
 import { NewPostModalProps } from '@/commom/interfaces/newPostModal';
-import Post from '../../components/Post';
+import Post from '../../components/post/Post';
 import { usePosts } from '@/context/PostContext';
 
 const MyPosts: React.FC = () => {

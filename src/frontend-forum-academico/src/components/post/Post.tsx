@@ -1,6 +1,6 @@
 import React from 'react';
 import './postStyles.css';
-import { PostProps } from '../commom/interfaces/postProps';
+import { PostProps } from '../../commom/interfaces/postProps';
 import { formatDateTime } from '@/commom/helper/date';
 
 const Post: React.FC<PostProps> = ({ author, date, content, likes, comments })=>{

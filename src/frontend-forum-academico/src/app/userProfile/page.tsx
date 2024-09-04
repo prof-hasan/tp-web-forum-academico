@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import Sidebar from '../../components/Sidebar';
+import Sidebar from '../../components/sidebar/Sidebar';
 import './styles.css';
 import { useAuth } from '@/context/AuthContext';
 import { usePosts } from '@/context/PostContext';
