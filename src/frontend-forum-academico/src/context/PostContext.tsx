@@ -32,6 +32,7 @@ export const PostProvider = ({ children }: { children: ReactNode }) => {
         } catch (error: any) {
             if (error.response && error.response.status === 401) {
                 toast.error("Credenciais inválidas!"); 
+                router.push('/login');
             } else {
                 toast.error("Ocorreu um erro ao tentar carregar os posts. Por favor, tente novamente."); 
             }
@@ -48,6 +49,7 @@ export const PostProvider = ({ children }: { children: ReactNode }) => {
         } catch (error: any) {
             if (error.response && error.response.status === 401) {
                 toast.error("Credenciais inválidas!"); 
+                router.push('/login');
             } else {
                 toast.error("Ocorreu um erro ao carregar os seus posts. Tente novamente."); 
             }

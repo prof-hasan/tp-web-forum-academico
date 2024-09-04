@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         } catch (error: any) {
             if (error.response && error.response.status === 401) {
                 toast.error("Credenciais inválidas!"); 
+                router.push('/login');
             } else {
                 toast.error("Ocorreu um erro ao tentar fazer login. Por favor, tente novamente."); 
             }
