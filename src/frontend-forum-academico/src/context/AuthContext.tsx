@@ -11,6 +11,7 @@ interface AuthContextType {
   login: (email:string, password:string) => void;
   logout: () => void;
   createUser: (name: string, email: string, password: string) => Promise<void>;
+  getMyUser: () => Promise<void>;
   myUser: User|undefined;
 }
 
@@ -87,7 +88,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, myUser, login, logout, createUser }}>
+        <AuthContext.Provider value={{ isAuthenticated, myUser, login, logout, createUser, getMyUser}}>
         {children}
         </AuthContext.Provider>
     );

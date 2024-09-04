@@ -8,12 +8,15 @@ import { usePosts } from '@/context/PostContext';
 import { formatDateTime } from '@/commom/helper/date';
 
 const UserProfile: React.FC = () => {
-  const {myUser} = useAuth();
+  const {myUser, getMyUser} = useAuth();
   const {myPosts,  getMyPosts} = usePosts();
 
   useEffect(() => {
     if(myPosts.length === 0){
       getMyPosts();
+    }
+    if(!myUser){
+      getMyUser();
     }
   },[])
 
@@ -27,6 +30,7 @@ const UserProfile: React.FC = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    console.log(name, value);
     // setUserData({
     //   ...userData,
     //   [name]: value,
@@ -35,7 +39,8 @@ const UserProfile: React.FC = () => {
 
   const handleUpdate = (field: string) => {
     // Aqui você pode fazer a requisição para a API para atualizar o campo correspondente
-    // console.log(`Atualizando ${field}:`, userData[field as keyof typeof userData]);
+    console.log(`Atualizando ${field}:`);
+
   };
 
   console.log(myUser);
@@ -55,8 +60,7 @@ const UserProfile: React.FC = () => {
                   type="text"
                   name="firstName"
                   value={myUser?.name.split(' ')[0]}
-                  onChange={handleChange}
-                  placeholder={myUser?.name.split(' ')[0]}
+                  // placeholder={myUser?.name.split(' ')[0]}
                 />
                 <button type="button" onClick={() => handleUpdate('firstName')}>
                   ATUALIZAR
@@ -68,7 +72,6 @@ const UserProfile: React.FC = () => {
                   type="text"
                   name="lastName"
                   value={myUser?.name.split(' ').slice(1).join(' ')}
-                  onChange={handleChange}
                   placeholder={myUser?.name.split(' ').slice(1).join(' ')}
                 />
                 <button type="button" onClick={() => handleUpdate('lastName')}>
@@ -81,7 +84,6 @@ const UserProfile: React.FC = () => {
                   type="email"
                   name="email"
                   value={myUser?.email}
-                  onChange={handleChange}
                   placeholder={myUser?.email}
                 />
                 <button type="button" onClick={() => handleUpdate('email')}>
@@ -94,7 +96,6 @@ const UserProfile: React.FC = () => {
                   type="password"
                   name="password"
                   value={myUser?.password}
-                  onChange={handleChange}
                   placeholder={myUser?.password}
                 />
                 <button type="button" onClick={() => handleUpdate('password')}>
