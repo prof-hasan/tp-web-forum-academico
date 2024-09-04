@@ -1,31 +1,26 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Sidebar from '../../components/Sidebar';
 import NewPostModal from '../../components/NewPostModal';
 import { PostProps } from '../../commom/interfaces/postProps';
 import './styles.css';
 import { NewPostModalProps } from '@/commom/interfaces/newPostModal';
 import Post from '../../components/Post';
+import { usePosts } from '@/context/PostContext';
 
 const MyPosts: React.FC = () => {
+    const {getPosts, posts} = usePosts();
+
+    useEffect(() => {
+      getPosts();
+    }, [getPosts]);
   
   const [filter, setFilter] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [posts, setPosts] = useState<PostProps[]>([
-    {
-      author: 'Zalter',
-      date: '04 feb 2024',
-      content: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
-      likes: 20,
-      comments: 17,
-    },
-    // Adicione mais posts aqui
-  ]);
-
   const filteredPosts = posts.filter(post =>
-    post.content.toLowerCase().includes(filter.toLowerCase())
+    post.text.toLowerCase().includes(filter.toLowerCase())
   );
 
   const handleNewPost = (content: string) => {
@@ -36,7 +31,6 @@ const MyPosts: React.FC = () => {
       likes: 0,
       comments: 0,
     };
-    setPosts([newPost, ...posts]);
   };
 
   return (
@@ -54,11 +48,11 @@ const MyPosts: React.FC = () => {
         {filteredPosts.map((post, index) => (
           <Post
             key={index}
-            author={post.author}
-            date={post.date}
-            content={post.content}
-            likes={post.likes}
-            comments={post.comments}
+            author={`${post.user_name} ${post.title}`}
+            date={post.created_at}
+            content={post.text}
+            likes={post.likes.length}
+            comments={post.saveds.length}
           />
         ))}
         <div className="floating-action-button" onClick={() => setIsModalOpen(true)}>+</div>
