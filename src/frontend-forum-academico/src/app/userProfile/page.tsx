@@ -1,15 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import Sidebar from '../../components/sidebar/Sidebar';
 import './styles.css';
 import { useAuth } from '@/context/AuthContext';
 import { usePosts } from '@/context/PostContext';
 import { formatDateTime } from '@/commom/helper/date';
+import { UserKeys } from '@/commom/interfaces/user';
 
 const UserProfile: React.FC = () => {
-  const {myUser, getMyUser} = useAuth();
+  const {myUser, getMyUser, updateUserData} = useAuth();
   const {myPosts,  getMyPosts} = usePosts();
+  const [userData, setUserData] = useState({...myUser});
+
+  useEffect(() => {
+    setUserData({...myUser})
+  }, [myUser]);
 
   useEffect(() => {
     if(myPosts.length === 0){
@@ -20,30 +26,14 @@ const UserProfile: React.FC = () => {
     }
   },[])
 
-  const [usageData] = useState({
-    postsMade: 34,
-    likesReceived: 3455,
-    postsSaved: 3455,
-    joinedDate: '05/05/2024',
-    lastLogin: '05/05/2024',
-  });
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(name, value);
-    // setUserData({
-    //   ...userData,
-    //   [name]: value,
-    // });
+    setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleUpdate = (field: string) => {
-    // Aqui você pode fazer a requisição para a API para atualizar o campo correspondente
-    console.log(`Atualizando ${field}:`);
-
+  const handleUpdate = (field: UserKeys) => {
+    updateUserData(field, userData[field]!);
   };
-
-  console.log(myUser);
 
   return (
     <div className="container">
@@ -58,23 +48,11 @@ const UserProfile: React.FC = () => {
                 <label>Nome</label>
                 <input
                   type="text"
-                  name="firstName"
-                  value={myUser?.name.split(' ')[0]}
-                  // placeholder={myUser?.name.split(' ')[0]}
+                  name="name"
+                  value={userData?.name}
+                  onChange={handleChange}
                 />
-                <button type="button" onClick={() => handleUpdate('firstName')}>
-                  ATUALIZAR
-                </button>
-              </div>
-              <div className="form-group">
-                <label>Sobrenome</label>
-                <input
-                  type="text"
-                  name="lastName"
-                  value={myUser?.name.split(' ').slice(1).join(' ')}
-                  placeholder={myUser?.name.split(' ').slice(1).join(' ')}
-                />
-                <button type="button" onClick={() => handleUpdate('lastName')}>
+                <button type="button" onClick={() => handleUpdate('name')}>
                   ATUALIZAR
                 </button>
               </div>
@@ -83,8 +61,8 @@ const UserProfile: React.FC = () => {
                 <input
                   type="email"
                   name="email"
-                  value={myUser?.email}
-                  placeholder={myUser?.email}
+                  value={userData?.email}
+                  onChange={handleChange}
                 />
                 <button type="button" onClick={() => handleUpdate('email')}>
                   ATUALIZAR
@@ -95,8 +73,8 @@ const UserProfile: React.FC = () => {
                 <input
                   type="password"
                   name="password"
-                  value={myUser?.password}
-                  placeholder={myUser?.password}
+                  value={userData?.password}
+                  onChange={handleChange}
                 />
                 <button type="button" onClick={() => handleUpdate('password')}>
                   ATUALIZAR

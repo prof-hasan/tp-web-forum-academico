@@ -8,5 +8,6 @@ interface User {
     password: string;
     role: string;
 }
-
+type UserKeys = keyof User;
 export default User;
+export type { UserKeys };
