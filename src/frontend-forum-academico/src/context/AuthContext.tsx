@@ -1,5 +1,5 @@
 'use client'
-import User from '@/commom/interfaces/user';
+import User, { UserKeys } from '@/commom/interfaces/user';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { createContext, useContext, useState, ReactNode } from 'react';
@@ -8,11 +8,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 interface AuthContextType {
   isAuthenticated: boolean;
+  myUser: User|undefined;
   login: (email:string, password:string) => void;
   logout: () => void;
   createUser: (name: string, email: string, password: string) => Promise<void>;
   getMyUser: () => Promise<void>;
-  myUser: User|undefined;
+  updateUserData: (field: UserKeys, value: string) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -86,9 +87,50 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         }
     }
 
+    const updateUserData = async (field: UserKeys, value: string) => {
+        try{
+            if (!myUser) {
+                toast.error("Usuario nao encontrado."); 
+                router.push('/login'); 
+                return;
+            }
+            myUser[field] = value;
+            const withNewPassword = field === 'password';
+            await updateUser(myUser, withNewPassword);
+
+        }catch(error: any){
+            toast.error("Ocorreu um erro ao acessar as informações."); 
+            console.log(error);
+        }
+
+    }
+
+    const updateUser = async (user:User, withNewPassword:boolean) => {
+        try {
+            const token = localStorage.getItem('acessToken');
+            const response: any = await axios.put(`http://localhost:8000/my_user/${withNewPassword}`, user, {
+                headers:{
+                "Authorization": `Bearer ${token}`,
+            }});
+            if (response.status === 201) {
+                toast.success("Atualizado com sucesso!"); 
+            }
+        } catch (error: any) {
+            if (error.response && error.response.status === 401) {
+                toast.error("Credenciais inválidas!"); 
+                router.push('/login'); 
+                return;
+            }
+            toast.error("Ocorreu um erro ao tentar atualizer os dados."); 
+            console.log(error);
+            return;
+        }
+
+    }
+
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, myUser, login, logout, createUser, getMyUser}}>
+        <AuthContext.Provider value={{ isAuthenticated, myUser, login, logout, createUser, getMyUser, updateUserData}}>
         {children}
         </AuthContext.Provider>
     );

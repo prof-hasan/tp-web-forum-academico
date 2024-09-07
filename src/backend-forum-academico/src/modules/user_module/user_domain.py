@@ -29,3 +29,12 @@ class UserDomain:
 
     async def create_user(self, user: UserModel):
         await self.__user_repository.save(user)
+
+    async def update_user(self, user: UserModel, user_id: str, passwordUpdate: bool)->bool:
+        if not passwordUpdate:
+            old_user_data = await self.get_user_by_id(user_id)
+            if old_user_data is None:
+                return False
+            user.password = old_user_data.password
+        await self.__user_repository.save(user)
+        return True

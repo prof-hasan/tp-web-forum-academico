@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from .user_repository import UserRepository
 from .user_domain import UserDomain
 from ...models import UserModel
@@ -33,3 +33,13 @@ async def create_user(user: UserModel):
 async def get_user_by_id(token = Depends(auth_middleware)):
     user = await user_domain.get_user_by_id(token["id"])
     return user
+
+@user_router.put("/my_user/{passwordUpdate}", status_code=201)
+async def update_user(user: UserModel, passwordUpdate:bool, token = Depends(auth_middleware)):
+    if passwordUpdate:
+        user.password = token_domain.get_password_hash(user.password)
+    result = await user_domain.update_user(user, token["id"], passwordUpdate)
+    if result:
+        return True
+    raise HTTPException(status_code=404, detail="User not found")
+    
