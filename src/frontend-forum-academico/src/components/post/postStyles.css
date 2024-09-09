@@ -1,0 +1,41 @@
+.post {
+  background: #fff;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+}
+
+.content {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #444;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 14px;
+  color: #777;
+}
+
+.likes, .comments {
+  margin-left: 20px;
+  cursor: pointer 
+}
+
+.author {
+  color: #555;
+}
+
+.date {
+  color: #999;
+}

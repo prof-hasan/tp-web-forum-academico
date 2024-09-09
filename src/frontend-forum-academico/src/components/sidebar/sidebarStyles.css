@@ -1,0 +1,55 @@
+.sidebar {
+  width: 240px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  margin-bottom: 40px;
+  width: 100px; /* Ajuste conforme necessário */
+}
+
+.icons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+
+.icon {
+  background: none;
+  border: none;
+  font-size: 36px;
+  margin-bottom: 48px;
+  cursor: pointer;
+  padding: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.selected{
+  background-color: #444242;
+  border-radius: 50%;
+  color: white;
+  font-size: 42px;
+
+}
+
+.icon:hover {
+  background-color: #f0f0f0;
+  border-radius: 50%;
+}
+
+.icon.active {
+  background-color: #007bff; /* Cor de fundo para o ícone ativo */
+  color: white; /* Cor do ícone ativo */
+  border-radius: 50%;
+}
