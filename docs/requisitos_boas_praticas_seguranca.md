@@ -7,3 +7,7 @@
 - ⁠Implementar HTTPS no sistema em produção.
 - Manter registrado os dados e interações com o soft-delete.
 - No frontend, caso o usuário não tenha um token valido, ele deve ser redirecionado para a página de login.
+- Configurar CORS para aceitar apenas domínios confiáveis.
+- Manter dependências atualizadas para evitar vulnerabilidades conhecidas.
+- Configurar uma Content Security Policy (CSP) no Next.js para mitigar ataques XSS.
+- Desabilitar métodos HTTP não utilizados no FastAPI.
